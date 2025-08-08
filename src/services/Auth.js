@@ -19,6 +19,18 @@ export const SignInUser = async (data) => {
   }
 }
 
+export const UpdatePassword = async (userId, oldPassword, newPassword) => {
+  try {
+    const res = await Client.put(`/auth/update/${userId}`, {
+      oldPassword,
+      newPassword
+    })
+    return res.data
+  } catch (error) {
+    throw error
+  }
+}
+
 export const CheckSession = async () => {
   try {
     const res = await Client.get('/auth/session')

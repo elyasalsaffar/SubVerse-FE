@@ -4,6 +4,8 @@ import { CheckSession } from './services/Auth'
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 import LandingPage from './pages/LandingPage'
 import HomePage from './pages/HomePage'
+import Sidebar from './components/Sidebar'
+import ProfilePage from './pages/ProfilePage'
 
 const App = () => {
 
@@ -31,14 +33,16 @@ const App = () => {
     if (token) {
       checkToken()
     }
-  }, [])
+  }, [user])
 
   return (
     <>
+    {user && <Sidebar setUser={setUser} />}
     <Routes>
-      <Route path="/" element={<LandingPage setUser={setUser} />} />
-      <Route path="/home" element={user ? <HomePage user={user} /> : <LandingPage setUser={setUser} />} />
-      <Route path="*" element={<h1>404 Not Found</h1>} />
+      <Route path='/' element={<LandingPage setUser={setUser} />} />
+      <Route path='/home' element={user ? <HomePage user={user} /> : <LandingPage setUser={setUser} />} />
+      <Route path='/profile' element={user ? <ProfilePage user={user} /> : <LandingPage setUser={setUser} /> } />
+      <Route path='*' element={<h1>404 Not Found</h1>} />
     </Routes>
     </>
   )
