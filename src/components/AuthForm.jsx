@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { SignInUser, RegisterUser } from "../services/Auth"
+import { useNavigate } from "react-router-dom"
 
 const AuthForm = ({ isLogin, setUser }) => {
     const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ const AuthForm = ({ isLogin, setUser }) => {
     })
 
     const [error, setError] = useState(null)
+    const navigate = useNavigate()
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -23,6 +25,7 @@ const AuthForm = ({ isLogin, setUser }) => {
                     password: formData.password
                 })
                 setUser(user)
+                navigate('/home')
             } else {
                 const data = {
                     username: formData.username,
@@ -33,8 +36,8 @@ const AuthForm = ({ isLogin, setUser }) => {
                 alert('Account created. Please log in.')
             }
         } catch (error) {
+            console.error('Auth error:', error.response?.data || error.message)
             setError('Something went wrong. Please try again.')
-            console.error(error)
         }
     }
 

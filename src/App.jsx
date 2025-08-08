@@ -3,6 +3,7 @@ import './App.css'
 import { CheckSession } from './services/Auth'
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 import LandingPage from './pages/LandingPage'
+import HomePage from './pages/HomePage'
 
 const App = () => {
 
@@ -34,10 +35,11 @@ const App = () => {
 
   return (
     <>
-     <Routes>
-      <Route path='/' element={<LandingPage setUser={setUser} />} />
-      <Route path='*' element={<h1>Page Not Found</h1>} />
-     </Routes>
+    <Routes>
+      <Route path="/" element={<LandingPage setUser={setUser} />} />
+      <Route path="/home" element={user ? <HomePage user={user} /> : <LandingPage setUser={setUser} />} />
+      <Route path="*" element={<h1>404 Not Found</h1>} />
+    </Routes>
     </>
   )
 }
