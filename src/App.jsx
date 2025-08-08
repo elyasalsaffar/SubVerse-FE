@@ -1,6 +1,8 @@
 import { use, useEffect, useState } from 'react'
 import './App.css'
 import { CheckSession } from './services/Auth'
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
+import LandingPage from './pages/LandingPage'
 
 const App = () => {
 
@@ -32,8 +34,10 @@ const App = () => {
 
   return (
     <>
-      <h1>Hello World</h1>
-      <p>😊</p>
+     <Routes>
+      <Route path='/' element={<LandingPage setUser={setUser} />} />
+      <Route path='*' element={<h1>Page Not Found</h1>} />
+     </Routes>
     </>
   )
 }
