@@ -14,6 +14,7 @@ const Sidebar = ({ setUser }) => {
             <h3>SubVerse</h3>
             <nav style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '2rem' }}>
                 <Link to='/home'>🏠 Home</Link>
+                <Link to='/create'>➕ Create</Link>
                 <Link to='/profile'>👤 Profile</Link>
                 <button onClick={handleLogOut} style={{ marginTop: 'auto' }}>🚪 Logout</button>
             </nav>

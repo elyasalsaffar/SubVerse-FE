@@ -7,6 +7,8 @@ import HomePage from './pages/HomePage'
 import Sidebar from './components/Sidebar'
 import ProfilePage from './pages/ProfilePage'
 import Layout from './components/Layout'
+import PostDetails from './pages/PostDetails'
+import CreatePost from './pages/CreatePost'
 
 const App = () => {
 
@@ -34,7 +36,7 @@ const App = () => {
     if (token) {
       checkToken()
     }
-  }, [user])
+  }, [])
 
   return (
     <>
@@ -43,6 +45,8 @@ const App = () => {
       <Route path='/' element={<LandingPage setUser={setUser} />} />
       <Route path='/home' element={user ? <Layout><HomePage user={user} /></Layout> : <LandingPage setUser={setUser} />} />
       <Route path='/profile' element={user ? <Layout><ProfilePage user={user} /></Layout> : <LandingPage setUser={setUser} /> } />
+      <Route path='/posts/:id' element={user ? <PostDetails user={user} /> : <LandingPage setUser={setUser} />} />
+      <Route path='/create' element={user ? <CreatePost /> : <LandingPage setUser={setUser} />} />
       <Route path='*' element={<h1>404 Not Found</h1>} />
     </Routes>
     </>
