@@ -20,7 +20,7 @@ const ProfilePage = ({ user }) => {
     }
 
     return (
-        <div style={{ marginLeft: '220px', padding: '1rem' }}>
+        <div>
             <h2>👤 Your Profile</h2>
             <p><strong>Username:</strong> {user?.username}</p>
             <p><strong>Email</strong> {user?.email}</p>

@@ -20,26 +20,26 @@ const AuthForm = ({ isLogin, setUser }) => {
         e.preventDefault()
         try {
             if (isLogin) {
-                const user = await SignInUser({
-                    email: formData.email,
-                    password: formData.password
-                })
-                setUser(user)
-                navigate('/home')
+            const user = await SignInUser({
+                email: formData.email,
+                password: formData.password
+            })
+            setUser(user) // only runs if SignInUser succeeded
+            navigate('/home')
             } else {
-                const data = {
-                    username: formData.username,
-                    email: formData.email,
-                    password: formData.password
-                }
-                await RegisterUser(data)
-                alert('Account created. Please log in.')
+            await RegisterUser({
+                username: formData.username,
+                email: formData.email,
+                password: formData.password
+            })
+            alert('Account created. Please log in.')
             }
         } catch (error) {
             console.error('Auth error:', error.response?.data || error.message)
-            setError('Something went wrong. Please try again.')
+            setError(error.response?.data?.msg || 'Invalid credentials')
         }
     }
+
 
     return (
         <form onSubmit={handleSubmit} style={{ marginTop: '20px' }}>

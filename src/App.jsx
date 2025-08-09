@@ -6,6 +6,7 @@ import LandingPage from './pages/LandingPage'
 import HomePage from './pages/HomePage'
 import Sidebar from './components/Sidebar'
 import ProfilePage from './pages/ProfilePage'
+import Layout from './components/Layout'
 
 const App = () => {
 
@@ -40,8 +41,8 @@ const App = () => {
     {user && <Sidebar setUser={setUser} />}
     <Routes>
       <Route path='/' element={<LandingPage setUser={setUser} />} />
-      <Route path='/home' element={user ? <HomePage user={user} /> : <LandingPage setUser={setUser} />} />
-      <Route path='/profile' element={user ? <ProfilePage user={user} /> : <LandingPage setUser={setUser} /> } />
+      <Route path='/home' element={user ? <Layout><HomePage user={user} /></Layout> : <LandingPage setUser={setUser} />} />
+      <Route path='/profile' element={user ? <Layout><ProfilePage user={user} /></Layout> : <LandingPage setUser={setUser} /> } />
       <Route path='*' element={<h1>404 Not Found</h1>} />
     </Routes>
     </>
