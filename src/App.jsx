@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import { CheckSession } from './services/Auth'
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
@@ -9,6 +9,7 @@ import ProfilePage from './pages/ProfilePage'
 import Layout from './components/Layout'
 import PostDetails from './pages/PostDetails'
 import CreatePost from './pages/CreatePost'
+import MyPosts from './pages/MyPosts'
 
 const App = () => {
 
@@ -44,6 +45,7 @@ const App = () => {
     <Routes>
       <Route path='/' element={<LandingPage setUser={setUser} />} />
       <Route path='/home' element={user ? <Layout><HomePage user={user} /></Layout> : <LandingPage setUser={setUser} />} />
+      <Route path='/my-posts' element={user ? <MyPosts user={user} /> : <LandingPage setUser={setUser} />} />
       <Route path='/profile' element={user ? <Layout><ProfilePage user={user} /></Layout> : <LandingPage setUser={setUser} /> } />
       <Route path='/posts/:id' element={user ? <PostDetails user={user} /> : <LandingPage setUser={setUser} />} />
       <Route path='/create' element={user ? <CreatePost /> : <LandingPage setUser={setUser} />} />
