@@ -204,13 +204,35 @@ const HomePage = ({ user }) => {
                 </div>
               </div>
               {isOwner && (
-                <button
-                  onClick={() => deletePost(p._id)}
-                  style={{ color: '#b00' }}
-                >
-                  Delete
-                </button>
-              )}
+              <button
+                onClick={() => deletePost(p._id)}
+                style={{ color: '#b00' }}
+              >
+                Delete
+              </button>
+            )}
+
+            {!isOwner && (
+              <button
+                onClick={async () => {
+                  if (!localStorage.getItem('token')) return alert('Please log in')
+                  if (window.confirm('Report this post’s creator?')) {
+                    try {
+                      await Client.post('/reports', {
+                        reportedUserId: p.createdBy._id,
+                        reason: 'Inappropriate content'
+                      })
+                      alert('Reported successfully')
+                    } catch (err) {
+                      alert(err.response?.data?.msg || 'Failed to report')
+                    }
+                  }
+                }}
+              >
+                🚩 Report
+              </button>
+            )}
+
             </div>
 
             {/* Text post */}

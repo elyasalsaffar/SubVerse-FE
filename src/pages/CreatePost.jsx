@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Client from '../services/api'
 
-const CreatePost = () => {
+const CreatePost = ({ user }) => {
   const navigate = useNavigate()
 
   const [subverses, setSubverses] = useState([])
@@ -53,6 +53,11 @@ const CreatePost = () => {
     if (submitting) return
     setSubmitting(true)
     setError('')
+
+    if (user?.isSuspended) {
+    setSubmitting(false)
+    return alert('Your account is suspended from creating new posts')
+    }
 
     if (!localStorage.getItem('token')) {
       setSubmitting(false)

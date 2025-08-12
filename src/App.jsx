@@ -10,6 +10,7 @@ import Layout from './components/Layout'
 import PostDetails from './pages/PostDetails'
 import CreatePost from './pages/CreatePost'
 import MyPosts from './pages/MyPosts'
+import AdminUsers from './pages/AdminUsers'
 
 const App = () => {
 
@@ -48,7 +49,8 @@ const App = () => {
       <Route path='/my-posts' element={user ? <MyPosts user={user} /> : <LandingPage setUser={setUser} />} />
       <Route path='/profile' element={user ? <Layout><ProfilePage user={user} /></Layout> : <LandingPage setUser={setUser} /> } />
       <Route path='/posts/:id' element={user ? <PostDetails user={user} /> : <LandingPage setUser={setUser} />} />
-      <Route path='/create' element={user ? <CreatePost /> : <LandingPage setUser={setUser} />} />
+      <Route path='/create' element={user ? <CreatePost user={user} /> : <LandingPage setUser={setUser} />} />
+      <Route path='/admin/users' element={user?.isAdmin ? <AdminUsers /> : <LandingPage setUser={setUser} />} />
       <Route path='*' element={<h1>404 Not Found</h1>} />
     </Routes>
     </>
