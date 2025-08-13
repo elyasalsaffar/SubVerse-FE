@@ -4,6 +4,7 @@
 import { useEffect, useState } from "react"
 import { useLocation, useNavigate, Link } from "react-router-dom"
 import Client from "../services/api"
+import { FaArrowUp, FaArrowDown } from "react-icons/fa" // ✅ NEW ICONS
 
 // Detect YouTube links
 const isYouTube = (url = '') =>
@@ -189,12 +190,46 @@ const HomePage = ({ user }) => {
                 gap: 12,
                 alignItems: 'center'
               }}>
-                <button onClick={() => vote(p._id, 'upvote')} disabled={!!voteBusy[p._id]}>
-                  ⬆️ {counts.upvotes}
-                </button>
-                <button onClick={() => vote(p._id, 'downvote')} disabled={!!voteBusy[p._id]}>
-                  ⬇️ {counts.downvotes}
-                </button>
+                {/* ✅ Upvote Button */}
+              <button
+                onClick={() => vote(p._id, 'upvote')}
+                disabled={!!voteBusy[p._id]}
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  fontWeight: '600',
+                  fontSize: '1rem',
+                  color: '#333' // make sure numbers are visible
+                }}
+              >
+                <FaArrowUp style={{ color: 'green', fontSize: '1.3rem' }} />
+                <span>{counts.upvotes ?? 0}</span>
+              </button>
+
+              {/* ✅ Downvote Button */}
+              <button
+                onClick={() => vote(p._id, 'downvote')}
+                disabled={!!voteBusy[p._id]}
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  fontWeight: '600',
+                  fontSize: '1rem',
+                  color: '#333'
+                }}
+              >
+                <FaArrowDown style={{ color: 'red', fontSize: '1.3rem' }} />
+                <span>{counts.downvotes ?? 0}</span>
+              </button>
+
                 <div>
                   <h3 style={{ margin: '0 0 6px' }}>
                     <Link to={`/posts/${p._id}`}>{p.title}</Link>

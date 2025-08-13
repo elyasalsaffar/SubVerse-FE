@@ -152,7 +152,7 @@ const CreatePost = ({ user }) => {
                 />
               </div>
             ))}
-            <button type="button" className="add-btn" onClick={addImage} disabled={submitting}>
+            <button type="button" className="add-image-btn" onClick={addImage} disabled={submitting}>
               + Add image
             </button>
           </div>

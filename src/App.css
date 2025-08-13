@@ -90,3 +90,44 @@ nav a:hover {
 .landing-page button {
   margin: 0 0.5rem;
 }
+
+select {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  background-color: white;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.3);
+}
+
+select {
+  appearance: none;
+  background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='black' d='M0 0l5 6 5-6H0z'/%3E%3C/svg%3E") no-repeat right 0.75rem center;
+  background-size: 10px 6px;
+}
+
+input, textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.add-image-btn {
+  background: #f3f4f6; /* Light gray for visibility */
+  color: #2563eb;
+  border: 1px solid #d1d5db;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.add-image-btn:hover {
+  background: #2563eb;
+  color: white;
+}
