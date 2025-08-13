@@ -1,8 +1,7 @@
-// review later
-
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Client from '../services/api'
+import { FaArrowUp, FaArrowDown } from 'react-icons/fa'
 
 const PostDetails = ({ user }) => {
   const { id } = useParams()
@@ -22,7 +21,6 @@ const PostDetails = ({ user }) => {
       const c = await Client.get(`/comments/${id}`).then(r => r.data)
       setComments(c)
 
-      // Get vote counts for this post
       try {
         const v = await Client.get(`/votes/${id}`).then(r => r.data)
         setVoteCounts(v)
@@ -71,17 +69,50 @@ const PostDetails = ({ user }) => {
         in {post?.subverseId?.name} • by {post?.createdBy?.username}
       </div>
 
-      {/* Voting section */}
       <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginBottom: 12 }}>
-        <button onClick={() => vote('upvote')} disabled={voteBusy}>
-          ⬆️ {voteCounts.upvotes}
+        <button
+          onClick={() => vote('upvote')}
+          disabled={voteBusy}
+          style={{
+            background: 'transparent',
+            border: 'none',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            fontWeight: 600,
+            fontSize: '1rem',
+            color: '#333'
+          }}
+          title="Upvote"
+        >
+          <FaArrowUp style={{ color: 'green', fontSize: '1.3rem' }} />
+          <span>{voteCounts.upvotes ?? 0}</span>
         </button>
-        <button onClick={() => vote('downvote')} disabled={voteBusy}>
-          ⬇️ {voteCounts.downvotes}
+
+        <button
+          onClick={() => vote('downvote')}
+          disabled={voteBusy}
+          style={{
+            background: 'transparent',
+            border: 'none',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            fontWeight: 600,
+            fontSize: '1rem',
+            color: '#333'
+          }}
+          title="Downvote"
+        >
+          <FaArrowDown style={{ color: 'red', fontSize: '1.3rem' }} />
+          <span>{voteCounts.downvotes ?? 0}</span>
         </button>
       </div>
 
       {post.type === 'text' && post.content && <p>{post.content}</p>}
+
       {post.type === 'image' && post.imageUrls?.length > 0 && (
         <div style={{ display: 'flex', gap: 8, overflowX: 'auto' }}>
           {post.imageUrls.map((src, i) => (
@@ -89,6 +120,7 @@ const PostDetails = ({ user }) => {
           ))}
         </div>
       )}
+
       {post.type === 'video' && post.videoUrl && (
         <video style={{ width: '100%', borderRadius: 8 }} controls src={post.videoUrl} />
       )}
@@ -99,7 +131,7 @@ const PostDetails = ({ user }) => {
           rows={3}
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          style={{ width: '100%' }}
+          style={{ width: '100%', padding: '0.5rem', border: '1px solid #d1d5db', borderRadius: 6 }}
         />
         <button type="submit" style={{ marginTop: 8 }}>Add Comment</button>
       </form>

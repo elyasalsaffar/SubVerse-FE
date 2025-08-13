@@ -1,5 +1,3 @@
-// review later
-
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Client from '../services/api'
@@ -11,7 +9,6 @@ const CreatePost = ({ user }) => {
   const [loadingSubs, setLoadingSubs] = useState(true)
   const [submitting, setSubmitting] = useState(false)
 
-  // form state
   const [subverseId, setSubverseId] = useState('')
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')              
@@ -136,7 +133,6 @@ const CreatePost = ({ user }) => {
         <fieldset>
           <legend>Optional Media</legend>
 
-          {/* IMAGES */}
           <div>
             <div className="label-row">
               <strong>Image URLs</strong>
@@ -157,7 +153,6 @@ const CreatePost = ({ user }) => {
             </button>
           </div>
 
-          {/* VIDEO */}
           <div style={{ marginTop: '1rem' }}>
             <strong>Video URL</strong>
             {imageUrls.some(Boolean) && <span className="warn-text"> (images will be cleared)</span>}
@@ -179,7 +174,6 @@ const CreatePost = ({ user }) => {
         </button>
       </form>
 
-      {/* CSS in the same file */}
       <style>{`
         .create-post-container {
           margin-left: 200px;

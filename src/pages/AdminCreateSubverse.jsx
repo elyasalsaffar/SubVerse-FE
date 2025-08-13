@@ -1,54 +1,52 @@
-// review later
-
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Client from '../services/api'
 
 const AdminCreateSubverse = () => {
-  const [name, setName] = useState('')
-  const [description, setDescription] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
+  const [subverseName, setSubverseName] = useState('')
+  const [desc, setDesc] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [errMsg, setErrMsg] = useState('')
   const navigate = useNavigate()
 
-  const handleSubmit = async (e) => {
+  const submitForm = async (e) => {
     e.preventDefault()
-    setError('')
-    setLoading(true)
+    setErrMsg('')
+    setIsSubmitting(true)
 
     try {
-      await Client.post('/subverses', { name, description })
+      await Client.post('/subverses', { name: subverseName, description: desc })
       alert('✅ Subverse created successfully')
       navigate('/home')
-    } catch (err) {
-      setError(err.response?.data?.msg || 'Failed to create subverse')
+    } catch (e) {
+      setErrMsg(e?.response?.data?.msg || 'Failed to create subverse')
     } finally {
-      setLoading(false)
+      setIsSubmitting(false)
     }
   }
 
   return (
     <div style={{ marginLeft: 200, padding: '1rem' }}>
       <h2>Create New Subverse</h2>
-      <form onSubmit={handleSubmit} style={{ maxWidth: 500 }}>
+      <form onSubmit={submitForm} style={{ maxWidth: 500 }}>
         <label>Name</label>
         <input
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={subverseName}
+          onChange={(e) => setSubverseName(e.target.value)}
           required
         />
 
         <label>Description</label>
         <textarea
           rows={4}
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          value={desc}
+          onChange={(e) => setDesc(e.target.value)}
         />
 
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {errMsg && <p style={{ color: 'red' }}>{errMsg}</p>}
 
-        <button type="submit" disabled={loading}>
-          {loading ? 'Creating…' : 'Create Subverse'}
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? 'Creating…' : 'Create Subverse'}
         </button>
       </form>
     </div>

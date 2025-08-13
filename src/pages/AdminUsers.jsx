@@ -1,5 +1,3 @@
-// review later
-
 import { useEffect, useState } from 'react'
 import Client from '../services/api'
 

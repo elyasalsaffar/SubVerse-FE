@@ -1,9 +1,7 @@
-// review later
-
-// MyPosts.jsx
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import Client from "../services/api"
+import { FaArrowUp, FaArrowDown, FaTrash } from "react-icons/fa"
 
 // Detect YouTube link
 const isYouTube = (url = '') =>
@@ -32,12 +30,10 @@ const MyPosts = ({ user }) => {
   const loadPosts = async () => {
     setLoading(true)
     try {
-      // Fetch all posts, then filter client-side
       const res = await Client.get("/posts", { params: { sort: "latest" } })
       const mine = (res.data || []).filter(p => p?.createdBy?._id === user?.id)
       setPosts(mine)
 
-      // Load vote counts
       const counts = {}
       for (let p of mine) {
         try {
@@ -92,15 +88,58 @@ const MyPosts = ({ user }) => {
       {posts.map(p => {
         const counts = voteCounts[p._id] || { upvotes: 0, downvotes: 0 }
         return (
-          <div key={p._id} style={{ background: "#fff", border: "1px solid #ddd", borderRadius: 8, padding: 12, marginBottom: 12 }}>
-            <div style={{ display: "flex", gap: 12, alignItems: "center", justifyContent: "space-between" }}>
+          <div key={p._id} style={{
+            background: "#fff",
+            border: "1px solid #ddd",
+            borderRadius: 8,
+            padding: 12,
+            marginBottom: 12
+          }}>
+            <div style={{
+              display: "flex",
+              gap: 12,
+              alignItems: "center",
+              justifyContent: "space-between"
+            }}>
               <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-                <button onClick={() => vote(p._id, "upvote")} disabled={!!voteBusy[p._id]}>
-                  ⬆️ {counts.upvotes}
+                <button
+                  onClick={() => vote(p._id, "upvote")}
+                  disabled={!!voteBusy[p._id]}
+                  style={{
+                    background: 'transparent',
+                    border: 'none',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    fontWeight: '600',
+                    fontSize: '1rem',
+                    color: '#333'
+                  }}
+                >
+                  <FaArrowUp style={{ color: 'green', fontSize: '1.3rem' }} />
+                  <span>{counts.upvotes ?? 0}</span>
                 </button>
-                <button onClick={() => vote(p._id, "downvote")} disabled={!!voteBusy[p._id]}>
-                  ⬇️ {counts.downvotes}
+
+                <button
+                  onClick={() => vote(p._id, "downvote")}
+                  disabled={!!voteBusy[p._id]}
+                  style={{
+                    background: 'transparent',
+                    border: 'none',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    fontWeight: '600',
+                    fontSize: '1rem',
+                    color: '#333'
+                  }}
+                >
+                  <FaArrowDown style={{ color: 'red', fontSize: '1.3rem' }} />
+                  <span>{counts.downvotes ?? 0}</span>
                 </button>
+
                 <div>
                   <h3 style={{ margin: "0 0 6px" }}>
                     <Link to={`/posts/${p._id}`}>{p.title}</Link>
@@ -110,39 +149,72 @@ const MyPosts = ({ user }) => {
                   </div>
                 </div>
               </div>
-              <button onClick={() => deletePost(p._id)} style={{ color: "#b00" }}>
-                Delete
+
+              <button
+                onClick={() => deletePost(p._id)}
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: '4px',
+                  color: '#b0b0b0',
+                  transition: 'color 0.2s ease'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.color = '#b00'}
+                onMouseLeave={(e) => e.currentTarget.style.color = '#b0b0b0'}
+                title="Delete post"
+              >
+                <FaTrash size={16} />
               </button>
             </div>
 
-            {/* Text post */}
             {p.type === 'text' && p.content && (
               <p style={{ marginTop: 10 }}>{p.content}</p>
             )}
 
-            {/* Image post */}
             {p.type === 'image' && p.imageUrls?.length > 0 && (
-              <div style={{ marginTop: 10, display: 'flex', gap: 8, overflowX: 'auto' }}>
+              <div style={{
+                marginTop: 10,
+                display: 'flex',
+                gap: 8,
+                overflowX: 'auto'
+              }}>
                 {p.imageUrls.map((src, i) => (
                   <img key={i} src={src} alt="" style={{ maxHeight: 180, borderRadius: 8 }} />
                 ))}
               </div>
             )}
 
-            {/* Video post */}
             {p.type === 'video' && p.videoUrl && (
               isYouTube(p.videoUrl) ? (
-                <div style={{ marginTop: 10, position: 'relative', paddingBottom: '56.25%', height: 0 }}>
+                <div style={{
+                  marginTop: 10,
+                  position: 'relative',
+                  paddingBottom: '56.25%',
+                  height: 0
+                }}>
                   <iframe
                     src={toYouTubeEmbed(p.videoUrl)}
                     title={p.title}
-                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0, borderRadius: 8 }}
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      border: 0,
+                      borderRadius: 8
+                    }}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowFullScreen
                   />
                 </div>
               ) : (
-                <video style={{ width: '100%', marginTop: 10, borderRadius: 8 }} controls src={p.videoUrl} />
+                <video style={{
+                  width: '100%',
+                  marginTop: 10,
+                  borderRadius: 8
+                }} controls src={p.videoUrl} />
               )
             )}
           </div>

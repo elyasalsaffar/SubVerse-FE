@@ -1,10 +1,7 @@
-// review later
-
-// HomePage.jsx
 import { useEffect, useState } from "react"
 import { useLocation, useNavigate, Link } from "react-router-dom"
 import Client from "../services/api"
-import { FaArrowUp, FaArrowDown, FaTrash } from "react-icons/fa" // ✅ NEW ICONS
+import { FaArrowUp, FaArrowDown, FaTrash } from "react-icons/fa"
 
 // Detect YouTube links
 const isYouTube = (url = '') =>
@@ -36,7 +33,6 @@ const HomePage = ({ user }) => {
   const location = useLocation()
   const navigate = useNavigate()
 
-  // Show flash banner from CreatePost
   useEffect(() => {
     if (location.state?.flash) {
       setFlash(location.state.flash)
@@ -46,7 +42,6 @@ const HomePage = ({ user }) => {
     }
   }, [location.state, location.pathname, navigate])
 
-  // Load subverses
   useEffect(() => {
     const loadSubverses = async () => {
       try {
@@ -59,12 +54,10 @@ const HomePage = ({ user }) => {
     loadSubverses()
   }, [])
 
-  // Load posts + vote counts
   const loadPosts = async () => {
     setLoading(true)
     try {
       let res
-      // Change here depending on backend support
       if (sort === "latest") {
         res = await Client.get("/posts", { params: { sort: "latest", subverseId } })
       } else if (sort === "top") {
@@ -73,7 +66,6 @@ const HomePage = ({ user }) => {
 
       setPosts(res.data || [])
 
-      // Fetch vote counts for each post
       const counts = {}
       for (let p of res.data || []) {
         try {
@@ -122,7 +114,6 @@ const HomePage = ({ user }) => {
 
   return (
     <div>
-      {/* Flash banner */}
       {flash && (
         <div style={{
           background: '#e6ffed',
@@ -138,7 +129,6 @@ const HomePage = ({ user }) => {
 
       <h1>Welcome {user?.username}!</h1>
 
-      {/* Filters */}
       <div style={{
         display: 'flex',
         gap: 12,
@@ -190,7 +180,6 @@ const HomePage = ({ user }) => {
                 gap: 12,
                 alignItems: 'center'
               }}>
-                {/* ✅ Upvote Button */}
               <button
                 onClick={() => vote(p._id, 'upvote')}
                 disabled={!!voteBusy[p._id]}
@@ -203,14 +192,13 @@ const HomePage = ({ user }) => {
                   gap: '6px',
                   fontWeight: '600',
                   fontSize: '1rem',
-                  color: '#333' // make sure numbers are visible
+                  color: '#333'
                 }}
               >
                 <FaArrowUp style={{ color: 'green', fontSize: '1.3rem' }} />
                 <span>{counts.upvotes ?? 0}</span>
               </button>
 
-              {/* ✅ Downvote Button */}
               <button
                 onClick={() => vote(p._id, 'downvote')}
                 disabled={!!voteBusy[p._id]}
@@ -281,12 +269,10 @@ const HomePage = ({ user }) => {
 
             </div>
 
-            {/* Text post */}
             {p.type === 'text' && p.content && (
               <p style={{ marginTop: 10 }}>{p.content}</p>
             )}
 
-            {/* Image post */}
             {p.type === 'image' && p.imageUrls?.length > 0 && (
               <div style={{
                 marginTop: 10,
@@ -305,7 +291,6 @@ const HomePage = ({ user }) => {
               </div>
             )}
 
-            {/* Video post */}
             {p.type === 'video' && p.videoUrl && (
               isYouTube(p.videoUrl) ? (
                 <div
