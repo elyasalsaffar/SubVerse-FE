@@ -4,7 +4,7 @@
 import { useEffect, useState } from "react"
 import { useLocation, useNavigate, Link } from "react-router-dom"
 import Client from "../services/api"
-import { FaArrowUp, FaArrowDown } from "react-icons/fa" // ✅ NEW ICONS
+import { FaArrowUp, FaArrowDown, FaTrash } from "react-icons/fa" // ✅ NEW ICONS
 
 // Detect YouTube links
 const isYouTube = (url = '') =>
@@ -142,7 +142,7 @@ const HomePage = ({ user }) => {
       <div style={{
         display: 'flex',
         gap: 12,
-        alignItems: 'center',
+        alignItems: 'flex-end',
         flexWrap: 'wrap',
         margin: '12px 0'
       }}>
@@ -242,9 +242,19 @@ const HomePage = ({ user }) => {
               {isOwner && (
               <button
                 onClick={() => deletePost(p._id)}
-                style={{ color: '#b00' }}
+                style={{ 
+                  background: 'transparent',
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: '4px',
+                  color: '#b0b0b0',
+                  transition: 'color 0.2s ease'
+                 }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = '#b00'}
+                  onMouseLeave={(e) => e.currentTarget.style.color = '#b0b0b0'}
+                  title="Delete post"
               >
-                Delete
+                <FaTrash size={16} />
               </button>
             )}
 

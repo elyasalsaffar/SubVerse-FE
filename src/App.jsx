@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import { CheckSession } from './services/Auth'
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
+import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom'
 import LandingPage from './pages/LandingPage'
 import HomePage from './pages/HomePage'
 import Sidebar from './components/Sidebar'
@@ -16,6 +16,7 @@ import AdminCreateSubverse from './pages/AdminCreateSubverse'
 const App = () => {
 
   const [user, setUser] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   const location = useLocation()
 
@@ -31,6 +32,8 @@ const App = () => {
     } catch (error) {
       console.error('Session check failed: ', error)
       localStorage.removeItem('token')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -38,13 +41,22 @@ const App = () => {
     const token = localStorage.getItem('token')
     if (token) {
       checkToken()
+    } else {
+      setLoading(false)
     }
   }, [])
+
+  if (loading) {
+    return <p>Loading...</p>
+  }
 
   return (
     <>
     {user && <Sidebar setUser={setUser} />}
     <Routes>
+
+      <Route path='/' element={user ? <Navigate to='/home' /> : <LandingPage setUser={setUser} />} />
+
       <Route path='/' element={<LandingPage setUser={setUser} />} />
       <Route path='/home' element={user ? <Layout><HomePage user={user} /></Layout> : <LandingPage setUser={setUser} />} />
       <Route path='/my-posts' element={user ? <MyPosts user={user} /> : <LandingPage setUser={setUser} />} />

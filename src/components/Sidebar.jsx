@@ -31,7 +31,7 @@ const Sidebar = ({ setUser }) => {
                 {localStorage.getItem('token') && JSON.parse(atob(localStorage.getItem('token').split('.')[1])).isAdmin && (
                     <>
                     <Link to='/admin/users' style={{ color: 'white', textDecoration: 'none', padding: '0.5rem 0' }}>👥 Users</Link>
-                    <Link to='/admin/create-subverse' style={{ color: 'white', textDecoration: 'none', padding: '0.5rem 0' }}>Create Subverse</Link>
+                    <Link to='/admin/create-subverse' style={{ color: 'white', textDecoration: 'none', padding: '0.5rem 0' }}>🌌 Create Subverse</Link>
                     </>
                 )}
                 <Link to='/profile' style={{ color: 'white', textDecoration: 'none', padding: '0.5rem 0' }}>👤 Profile</Link>
