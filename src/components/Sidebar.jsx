@@ -17,7 +17,10 @@ const Sidebar = ({ setUser }) => {
                 <Link to='/my-posts'>📝 My Posts</Link>
                 <Link to='/create'>➕ Create</Link>
                 {localStorage.getItem('token') && JSON.parse(atob(localStorage.getItem('token').split('.')[1])).isAdmin && (
+                    <>
                     <Link to='/admin/users'>👥 Users</Link>
+                    <Link to='/admin/create-subverse' >Create Subverse</Link>
+                    </>
                 )}
                 <Link to='/profile'>👤 Profile</Link>
                 <button onClick={handleLogOut} style={{ marginTop: 'auto' }}>🚪 Logout</button>

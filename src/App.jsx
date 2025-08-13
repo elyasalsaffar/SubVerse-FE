@@ -11,6 +11,7 @@ import PostDetails from './pages/PostDetails'
 import CreatePost from './pages/CreatePost'
 import MyPosts from './pages/MyPosts'
 import AdminUsers from './pages/AdminUsers'
+import AdminCreateSubverse from './pages/AdminCreateSubverse'
 
 const App = () => {
 
@@ -51,6 +52,7 @@ const App = () => {
       <Route path='/posts/:id' element={user ? <PostDetails user={user} /> : <LandingPage setUser={setUser} />} />
       <Route path='/create' element={user ? <CreatePost user={user} /> : <LandingPage setUser={setUser} />} />
       <Route path='/admin/users' element={user?.isAdmin ? <AdminUsers /> : <LandingPage setUser={setUser} />} />
+      <Route path='/admin/create-subverse' element={user?.isAdmin ? <AdminCreateSubverse /> : <LandingPage setUser={setUser} />} />
       <Route path='*' element={<h1>404 Not Found</h1>} />
     </Routes>
     </>
