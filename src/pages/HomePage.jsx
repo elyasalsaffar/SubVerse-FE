@@ -170,11 +170,12 @@ const HomePage = ({ user }) => {
           <div
             key={p._id}
             style={{
-              background: '#fff',
-              border: '1px solid #ddd',
+              background: '#f9fafb',
+              border: '1px solid #e5e7eb',
               borderRadius: 8,
-              padding: 12,
-              marginBottom: 12
+              padding: '1rem',
+              marginBottom: '1rem',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.05)'
             }}
           >
             <div style={{

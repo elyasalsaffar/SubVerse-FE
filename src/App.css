@@ -1,4 +1,92 @@
+/* review later */
+
 body {
   margin: 0;
   box-sizing: border-box;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(to bottom right, #f9fafb, #e5e7eb);
+  color: #333;
+}
+
+h1, h2, h3 {
+  color: #111827;
+}
+
+a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s ease;
+}
+
+button:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+input, textarea, select {
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  width: 100%;
+  background-color: white;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+th, td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+  background-color: #f3f4f6;
+}
+
+tr:hover {
+  background-color: #f9fafb;
+}
+
+nav a:hover {
+  background: #1f2937;
+  border-radius: 6px;
+  padding-left: 0.5rem;
+}
+
+.landing-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.landing-page h1 {
+  font-size: 2.5rem;
+}
+
+.landing-page button {
+  margin: 0 0.5rem;
 }
