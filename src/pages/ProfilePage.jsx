@@ -19,8 +19,6 @@ const ProfilePage = ({ user }) => {
         }
     }
 
-    // review later
-
      return (
         <div style={{
             maxWidth: "500px",
