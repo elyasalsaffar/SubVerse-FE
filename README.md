@@ -1,6 +1,6 @@
 # SubVerse
 
-![App Screenshot](![Homepage](images/SC-P4-HomePage.png) )  
+![Homepage](images/SC-P4-HomePage.png)
 
 ## 📖 Description
 **SubVerse** is a community-driven discussion platform inspired by Reddit.  
