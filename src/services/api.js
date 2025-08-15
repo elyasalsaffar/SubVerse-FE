@@ -1,6 +1,11 @@
 import Axios from 'axios'
 
-export const BASE_URL = import.meta.env.VITE_API_URL
+// Automatically pick localhost in dev, Render URL in production
+export const BASE_URL =
+  import.meta.env.VITE_API_URL ||
+  (import.meta.env.DEV
+    ? 'http://localhost:3001'
+    : 'https://subverse.onrender.com')
 
 const Client = Axios.create({ baseURL: BASE_URL })
 
