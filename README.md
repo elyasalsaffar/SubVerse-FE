@@ -22,7 +22,7 @@ This project was built to deepen my skills in the MERN stack (MongoDB, Express, 
 ## 🚀 Getting Started
 
 ### **Live App**
-[🔗 View the deployed app here](https://your-deployed-link.com)
+[🔗 View the deployed app here](https://subverse.surge.sh)
 
 ### **Planning Materials**
 - [ERD (Entity Relationship Diagram)](https://www.figma.com/design/AMxEAaQu1YFb0yMj5VgSap/SubVerse-ERD?node-id=0-1&t=QkUAyqmhdBFewtsf-1)  

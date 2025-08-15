@@ -18,7 +18,7 @@ const AdminUsers = () => {
 
   return (
     <div style={{ marginLeft: 200, padding: '1rem' }}>
-      <h1>Flagged Users</h1>
+      <h1>Users</h1>
       <table border="1" cellPadding="8">
         <thead>
           <tr>
