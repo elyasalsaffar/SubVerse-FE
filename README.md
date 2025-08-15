@@ -1,7 +1,6 @@
 # SubVerse
 
-![App Screenshot](./screenshot.png)  
-*(Replace with actual screenshot or logo)*
+![App Screenshot](![Homepage](images/SC-P4-HomePage.png) )  
 
 ## 📖 Description
 **SubVerse** is a community-driven discussion platform inspired by Reddit.  
@@ -80,3 +79,9 @@ Planned future enhancements include:
 ![ERD](images/Screenshot-P4-ERD.png)
 
 ---
+
+## 📸 Screenshots
+![Homepage](images/SC-P4-HomePage.png)  
+![My Posts 1](images/SC-P4-MyPosts.png)  
+![My Posts 2](images/SC-P4-MyPosts2.png)  
+![Users Page](images/SC-P4-Users.png)
